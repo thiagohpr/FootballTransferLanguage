@@ -16,7 +16,7 @@ ASSIGN = IDENTIFIER "is", EXPRESSION|CONDITION;
 PRINT = "leak", "(", EXPRESSION|CONDITION, ")";
 WHILE = "season", "(", EXPRESSION | CONDITION, ")";
 IF = "consider rumour", "(", EXPRESSION |CONDITION, ")", "then", "{", BLOCK, "}", ["or else do","{", BLOCK, "}"]
-FUNCTION  = "transference", (ALPHABET, {CHAR}), "receives", "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
+FUNCTION  = "transference", (LETTER, {CHAR}), "receives", "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
 
 CONDITION =  EXPRESSION, ( "==" | "!=" | ">" | "<" | ">=" | "<=" ), EXPRESSION
 
