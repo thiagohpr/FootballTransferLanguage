@@ -1,12 +1,15 @@
 PROGRAM = "Here we Go!", BLOCK, "End of Record"
 BLOCK = { STATEMENT }
-STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION), "\n";
+STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n";
 
-ASSIGN = IDENTIFIER "is", EXPRESSION|CONDITION;
-PRINT = "leak", "(", EXPRESSION|CONDITION, ")";
-WHILE = "season", "(", EXPRESSION | CONDITION, ")";
-IF = "consider rumour", "(", EXPRESSION |CONDITION, ")", "then", "{", BLOCK, "}", ["or else do","{", BLOCK, "}"]
-FUNCTION  = "transference", (LETTER, {CHAR}), "receives", "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
+ASSIGN = IDENTIFIER "is", E(XPRESSION|CONDITION)
+PRINT = "leak", "(", (EXPRESSION|CONDITION), ")"
+WHILE = "as", "(", (EXPRESSION | CONDITION), ")", "begin conversation", "{", BLOCK, "}"
+IF = "consider rumour", "(", (EXPRESSION |CONDITION), ")", "then", "{", BLOCK, "}", ["or else do","{", BLOCK, "}"]
+
+FUNCTION  = "transference", VARIABLE, "receives", "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
+RETURN = "complete transference", (EXPRESSION | CONDITION)
+FUNCTIONCALL = VARIABLE, "(", [ VARIABLE, { ",", VARIABLE } ], ")"
 
 CONDITION =  EXPRESSION, ( "==" | "!=" | ">" | "<" | ">=" | "<=" ), EXPRESSION
 
@@ -27,5 +30,3 @@ CHAR = LETTER | DIGIT;
 DIGIT = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 LETTER = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
 SPACE = " ";
-
--> falta function call e return (complete transference)!
