@@ -1,6 +1,6 @@
 PROGRAM = "Here we Go!", BLOCK, "End of Record"
 BLOCK = { STATEMENT }
-STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n";
+STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n"
 
 ASSIGN = IDENTIFIER "is", E(XPRESSION|CONDITION)
 PRINT = "leak", "(", (EXPRESSION|CONDITION), ")"
@@ -13,20 +13,20 @@ FUNCTIONCALL = VARIABLE, "(", [ VARIABLE, { ",", VARIABLE } ], ")"
 
 CONDITION =  EXPRESSION, ( "==" | "!=" | ">" | "<" | ">=" | "<=" ), EXPRESSION
 
-EXPRESSION = TERM, {("+" | "-"), TERM} ;
-TERM = FACTOR, {("*" | "/"), FACTOR} ;
-FACTOR = (("+" | "-"), FACTOR) | "(", EXPRESSION, ")" | VARIABLE | PLAYER | VALUE | DEAL;
+EXPRESSION = TERM, {("+" | "-"), TERM} 
+TERM = FACTOR, {("*" | "/"), FACTOR} 
+FACTOR = (("+" | "-"), FACTOR) | "(", EXPRESSION, ")" | VARIABLE | PLAYER | VALUE | DEAL
 
 VARIABLE = LETTER, {CHAR}
-IDENTIFIER = VTYPE, VARIABLE;
+IDENTIFIER = VTYPE, VARIABLE
 
-PLAYER = '"', {CHAR | SPACE}, '"'; 
-VALUE = DIGIT, {DIGIT} ;
-DEAL= "green" | "red";
+PLAYER = '"', {CHAR | SPACE}, '"';
+VALUE = DIGIT, {DIGIT} 
+DEAL= "green" | "red"
 
-VTYPE = "player" | "value" | "deal";
+VTYPE = "player" | "value" | "deal"
 
-CHAR = LETTER | DIGIT;
-DIGIT = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+CHAR = LETTER | DIGIT
+DIGIT = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 LETTER = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
-SPACE = " ";
+SPACE = " "
