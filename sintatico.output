@@ -1,0 +1,1053 @@
+Terminals unused in grammar
+
+    BOOLEAN
+    NEWLINE
+    FLOAT
+
+
+State 1 conflicts: 6 shift/reduce
+State 65 conflicts: 7 shift/reduce
+State 77 conflicts: 6 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: CODEINIT statement_list CODEEND
+
+    2 block: OPEN_BRACES statement_list CLOSE_BRACES
+    3      | OPEN_BRACES CLOSE_BRACES
+
+    4 statement_list: statement
+    5               | statement_list statement
+    6               | %empty
+
+    7 statement: TYPE IDENTIFIER relexpression
+    8          | IDENTIFIER
+    9          | TYPE IDENTIFIER RECEIVE relexpression
+   10          | PRINT OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS
+   11          | IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block
+   12          | IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block ELSE block
+   13          | WHILE OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block
+   14          | FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES
+
+   15 func_dec_parameter_list: TYPE IDENTIFIER
+   16                        | func_dec_parameter_list COMMA TYPE IDENTIFIER
+
+   17 func_call_parameter_list: IDENTIFIER
+   18                         | func_call_parameter_list COMMA IDENTIFIER
+
+   19 relexpression: expression EQUAL_EXPR expression
+   20              | expression COMPARE_EXPR expression
+   21              | expression
+
+   22 expression: term PLUS term
+   23           | term MINUS term
+   24           | term OR_EXPR term
+   25           | term
+
+   26 term: factor
+   27     | term MULT factor
+   28     | term DIV factor
+   29     | term AND_EXPR factor
+
+   30 factor: INT
+   31       | STRING
+   32       | IDENTIFIER
+   33       | IDENTIFIER OPEN_PARENTHESIS func_call_parameter_list CLOSE_PARENTHESIS
+   34       | PLUS factor
+   35       | MINUS factor
+   36       | NOT factor
+   37       | OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    CODEINIT (258) 1
+    CODEEND (259) 1
+    TYPE (260) 7 9 15 16
+    AND_EXPR (261) 29
+    OR_EXPR (262) 24
+    PRINT (263) 10
+    WHILE (264) 13
+    IF (265) 11 12
+    ELSE (266) 12
+    FUNCTION (267) 14
+    RETURN (268) 14
+    EQUAL_EXPR (269) 19
+    RECEIVE (270) 9
+    COMPARE_EXPR (271) 20
+    PLUS (272) 22 34
+    MINUS (273) 23 35
+    MULT (274) 27
+    DIV (275) 28
+    COMMA (276) 16 18
+    NOT (277) 36
+    BOOLEAN (278)
+    OPEN_PARENTHESIS (279) 10 11 12 13 14 33 37
+    CLOSE_PARENTHESIS (280) 10 11 12 13 14 33 37
+    OPEN_BRACES (281) 2 3 14
+    CLOSE_BRACES (282) 2 3 14
+    NEWLINE (283)
+    IDENTIFIER (284) 7 8 9 14 15 16 17 18 32 33
+    INT (285) 30
+    FLOAT (286)
+    STRING (287) 31
+
+
+Nonterminals, with rules where they appear
+
+    $accept (33)
+        on left: 0
+    program (34)
+        on left: 1
+        on right: 0
+    block (35)
+        on left: 2 3
+        on right: 11 12 13
+    statement_list (36)
+        on left: 4 5 6
+        on right: 1 2 5 14
+    statement (37)
+        on left: 7 8 9 10 11 12 13 14
+        on right: 4 5
+    func_dec_parameter_list (38)
+        on left: 15 16
+        on right: 14 16
+    func_call_parameter_list (39)
+        on left: 17 18
+        on right: 18 33
+    relexpression (40)
+        on left: 19 20 21
+        on right: 7 9 10 11 12 13 14 37
+    expression (41)
+        on left: 22 23 24 25
+        on right: 19 20 21
+    term (42)
+        on left: 26 27 28 29
+        on right: 22 23 24 25 27 28 29
+    factor (43)
+        on left: 30 31 32 33 34 35 36 37
+        on right: 26 27 28 29 34 35 36
+
+
+State 0
+
+    0 $accept: . program $end
+
+    CODEINIT  shift, and go to state 1
+
+    program  go to state 2
+
+
+State 1
+
+    1 program: CODEINIT . statement_list CODEEND
+
+    TYPE        shift, and go to state 3
+    PRINT       shift, and go to state 4
+    WHILE       shift, and go to state 5
+    IF          shift, and go to state 6
+    FUNCTION    shift, and go to state 7
+    IDENTIFIER  shift, and go to state 8
+
+    TYPE        [reduce using rule 6 (statement_list)]
+    PRINT       [reduce using rule 6 (statement_list)]
+    WHILE       [reduce using rule 6 (statement_list)]
+    IF          [reduce using rule 6 (statement_list)]
+    FUNCTION    [reduce using rule 6 (statement_list)]
+    IDENTIFIER  [reduce using rule 6 (statement_list)]
+    $default    reduce using rule 6 (statement_list)
+
+    statement_list  go to state 9
+    statement       go to state 10
+
+
+State 2
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 11
+
+
+State 3
+
+    7 statement: TYPE . IDENTIFIER relexpression
+    9          | TYPE . IDENTIFIER RECEIVE relexpression
+
+    IDENTIFIER  shift, and go to state 12
+
+
+State 4
+
+   10 statement: PRINT . OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS
+
+    OPEN_PARENTHESIS  shift, and go to state 13
+
+
+State 5
+
+   13 statement: WHILE . OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block
+
+    OPEN_PARENTHESIS  shift, and go to state 14
+
+
+State 6
+
+   11 statement: IF . OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block
+   12          | IF . OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block ELSE block
+
+    OPEN_PARENTHESIS  shift, and go to state 15
+
+
+State 7
+
+   14 statement: FUNCTION . IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES
+
+    IDENTIFIER  shift, and go to state 16
+
+
+State 8
+
+    8 statement: IDENTIFIER .
+
+    $default  reduce using rule 8 (statement)
+
+
+State 9
+
+    1 program: CODEINIT statement_list . CODEEND
+    5 statement_list: statement_list . statement
+
+    CODEEND     shift, and go to state 17
+    TYPE        shift, and go to state 3
+    PRINT       shift, and go to state 4
+    WHILE       shift, and go to state 5
+    IF          shift, and go to state 6
+    FUNCTION    shift, and go to state 7
+    IDENTIFIER  shift, and go to state 8
+
+    statement  go to state 18
+
+
+State 10
+
+    4 statement_list: statement .
+
+    $default  reduce using rule 4 (statement_list)
+
+
+State 11
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 12
+
+    7 statement: TYPE IDENTIFIER . relexpression
+    9          | TYPE IDENTIFIER . RECEIVE relexpression
+
+    RECEIVE           shift, and go to state 19
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 27
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 13
+
+   10 statement: PRINT OPEN_PARENTHESIS . relexpression CLOSE_PARENTHESIS
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 31
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 14
+
+   13 statement: WHILE OPEN_PARENTHESIS . relexpression CLOSE_PARENTHESIS block
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 32
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 15
+
+   11 statement: IF OPEN_PARENTHESIS . relexpression CLOSE_PARENTHESIS block
+   12          | IF OPEN_PARENTHESIS . relexpression CLOSE_PARENTHESIS block ELSE block
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 33
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 16
+
+   14 statement: FUNCTION IDENTIFIER . OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES
+
+    OPEN_PARENTHESIS  shift, and go to state 34
+
+
+State 17
+
+    1 program: CODEINIT statement_list CODEEND .
+
+    $default  reduce using rule 1 (program)
+
+
+State 18
+
+    5 statement_list: statement_list statement .
+
+    $default  reduce using rule 5 (statement_list)
+
+
+State 19
+
+    9 statement: TYPE IDENTIFIER RECEIVE . relexpression
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 35
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 20
+
+   34 factor: PLUS . factor
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    factor  go to state 36
+
+
+State 21
+
+   35 factor: MINUS . factor
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    factor  go to state 37
+
+
+State 22
+
+   36 factor: NOT . factor
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    factor  go to state 38
+
+
+State 23
+
+   37 factor: OPEN_PARENTHESIS . relexpression CLOSE_PARENTHESIS
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 39
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 24
+
+   32 factor: IDENTIFIER .
+   33       | IDENTIFIER . OPEN_PARENTHESIS func_call_parameter_list CLOSE_PARENTHESIS
+
+    OPEN_PARENTHESIS  shift, and go to state 40
+
+    $default  reduce using rule 32 (factor)
+
+
+State 25
+
+   30 factor: INT .
+
+    $default  reduce using rule 30 (factor)
+
+
+State 26
+
+   31 factor: STRING .
+
+    $default  reduce using rule 31 (factor)
+
+
+State 27
+
+    7 statement: TYPE IDENTIFIER relexpression .
+
+    $default  reduce using rule 7 (statement)
+
+
+State 28
+
+   19 relexpression: expression . EQUAL_EXPR expression
+   20              | expression . COMPARE_EXPR expression
+   21              | expression .
+
+    EQUAL_EXPR    shift, and go to state 41
+    COMPARE_EXPR  shift, and go to state 42
+
+    $default  reduce using rule 21 (relexpression)
+
+
+State 29
+
+   22 expression: term . PLUS term
+   23           | term . MINUS term
+   24           | term . OR_EXPR term
+   25           | term .
+   27 term: term . MULT factor
+   28     | term . DIV factor
+   29     | term . AND_EXPR factor
+
+    AND_EXPR  shift, and go to state 43
+    OR_EXPR   shift, and go to state 44
+    PLUS      shift, and go to state 45
+    MINUS     shift, and go to state 46
+    MULT      shift, and go to state 47
+    DIV       shift, and go to state 48
+
+    $default  reduce using rule 25 (expression)
+
+
+State 30
+
+   26 term: factor .
+
+    $default  reduce using rule 26 (term)
+
+
+State 31
+
+   10 statement: PRINT OPEN_PARENTHESIS relexpression . CLOSE_PARENTHESIS
+
+    CLOSE_PARENTHESIS  shift, and go to state 49
+
+
+State 32
+
+   13 statement: WHILE OPEN_PARENTHESIS relexpression . CLOSE_PARENTHESIS block
+
+    CLOSE_PARENTHESIS  shift, and go to state 50
+
+
+State 33
+
+   11 statement: IF OPEN_PARENTHESIS relexpression . CLOSE_PARENTHESIS block
+   12          | IF OPEN_PARENTHESIS relexpression . CLOSE_PARENTHESIS block ELSE block
+
+    CLOSE_PARENTHESIS  shift, and go to state 51
+
+
+State 34
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS . func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES
+
+    TYPE  shift, and go to state 52
+
+    func_dec_parameter_list  go to state 53
+
+
+State 35
+
+    9 statement: TYPE IDENTIFIER RECEIVE relexpression .
+
+    $default  reduce using rule 9 (statement)
+
+
+State 36
+
+   34 factor: PLUS factor .
+
+    $default  reduce using rule 34 (factor)
+
+
+State 37
+
+   35 factor: MINUS factor .
+
+    $default  reduce using rule 35 (factor)
+
+
+State 38
+
+   36 factor: NOT factor .
+
+    $default  reduce using rule 36 (factor)
+
+
+State 39
+
+   37 factor: OPEN_PARENTHESIS relexpression . CLOSE_PARENTHESIS
+
+    CLOSE_PARENTHESIS  shift, and go to state 54
+
+
+State 40
+
+   33 factor: IDENTIFIER OPEN_PARENTHESIS . func_call_parameter_list CLOSE_PARENTHESIS
+
+    IDENTIFIER  shift, and go to state 55
+
+    func_call_parameter_list  go to state 56
+
+
+State 41
+
+   19 relexpression: expression EQUAL_EXPR . expression
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    expression  go to state 57
+    term        go to state 29
+    factor      go to state 30
+
+
+State 42
+
+   20 relexpression: expression COMPARE_EXPR . expression
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    expression  go to state 58
+    term        go to state 29
+    factor      go to state 30
+
+
+State 43
+
+   29 term: term AND_EXPR . factor
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    factor  go to state 59
+
+
+State 44
+
+   24 expression: term OR_EXPR . term
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    term    go to state 60
+    factor  go to state 30
+
+
+State 45
+
+   22 expression: term PLUS . term
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    term    go to state 61
+    factor  go to state 30
+
+
+State 46
+
+   23 expression: term MINUS . term
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    term    go to state 62
+    factor  go to state 30
+
+
+State 47
+
+   27 term: term MULT . factor
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    factor  go to state 63
+
+
+State 48
+
+   28 term: term DIV . factor
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    factor  go to state 64
+
+
+State 49
+
+   10 statement: PRINT OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 10 (statement)
+
+
+State 50
+
+   13 statement: WHILE OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS . block
+
+    OPEN_BRACES  shift, and go to state 65
+
+    block  go to state 66
+
+
+State 51
+
+   11 statement: IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS . block
+   12          | IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS . block ELSE block
+
+    OPEN_BRACES  shift, and go to state 65
+
+    block  go to state 67
+
+
+State 52
+
+   15 func_dec_parameter_list: TYPE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 68
+
+
+State 53
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list . CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES
+   16 func_dec_parameter_list: func_dec_parameter_list . COMMA TYPE IDENTIFIER
+
+    COMMA              shift, and go to state 69
+    CLOSE_PARENTHESIS  shift, and go to state 70
+
+
+State 54
+
+   37 factor: OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 37 (factor)
+
+
+State 55
+
+   17 func_call_parameter_list: IDENTIFIER .
+
+    $default  reduce using rule 17 (func_call_parameter_list)
+
+
+State 56
+
+   18 func_call_parameter_list: func_call_parameter_list . COMMA IDENTIFIER
+   33 factor: IDENTIFIER OPEN_PARENTHESIS func_call_parameter_list . CLOSE_PARENTHESIS
+
+    COMMA              shift, and go to state 71
+    CLOSE_PARENTHESIS  shift, and go to state 72
+
+
+State 57
+
+   19 relexpression: expression EQUAL_EXPR expression .
+
+    $default  reduce using rule 19 (relexpression)
+
+
+State 58
+
+   20 relexpression: expression COMPARE_EXPR expression .
+
+    $default  reduce using rule 20 (relexpression)
+
+
+State 59
+
+   29 term: term AND_EXPR factor .
+
+    $default  reduce using rule 29 (term)
+
+
+State 60
+
+   24 expression: term OR_EXPR term .
+   27 term: term . MULT factor
+   28     | term . DIV factor
+   29     | term . AND_EXPR factor
+
+    AND_EXPR  shift, and go to state 43
+    MULT      shift, and go to state 47
+    DIV       shift, and go to state 48
+
+    $default  reduce using rule 24 (expression)
+
+
+State 61
+
+   22 expression: term PLUS term .
+   27 term: term . MULT factor
+   28     | term . DIV factor
+   29     | term . AND_EXPR factor
+
+    AND_EXPR  shift, and go to state 43
+    MULT      shift, and go to state 47
+    DIV       shift, and go to state 48
+
+    $default  reduce using rule 22 (expression)
+
+
+State 62
+
+   23 expression: term MINUS term .
+   27 term: term . MULT factor
+   28     | term . DIV factor
+   29     | term . AND_EXPR factor
+
+    AND_EXPR  shift, and go to state 43
+    MULT      shift, and go to state 47
+    DIV       shift, and go to state 48
+
+    $default  reduce using rule 23 (expression)
+
+
+State 63
+
+   27 term: term MULT factor .
+
+    $default  reduce using rule 27 (term)
+
+
+State 64
+
+   28 term: term DIV factor .
+
+    $default  reduce using rule 28 (term)
+
+
+State 65
+
+    2 block: OPEN_BRACES . statement_list CLOSE_BRACES
+    3      | OPEN_BRACES . CLOSE_BRACES
+
+    TYPE          shift, and go to state 3
+    PRINT         shift, and go to state 4
+    WHILE         shift, and go to state 5
+    IF            shift, and go to state 6
+    FUNCTION      shift, and go to state 7
+    CLOSE_BRACES  shift, and go to state 73
+    IDENTIFIER    shift, and go to state 8
+
+    TYPE          [reduce using rule 6 (statement_list)]
+    PRINT         [reduce using rule 6 (statement_list)]
+    WHILE         [reduce using rule 6 (statement_list)]
+    IF            [reduce using rule 6 (statement_list)]
+    FUNCTION      [reduce using rule 6 (statement_list)]
+    CLOSE_BRACES  [reduce using rule 6 (statement_list)]
+    IDENTIFIER    [reduce using rule 6 (statement_list)]
+
+    statement_list  go to state 74
+    statement       go to state 10
+
+
+State 66
+
+   13 statement: WHILE OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block .
+
+    $default  reduce using rule 13 (statement)
+
+
+State 67
+
+   11 statement: IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block .
+   12          | IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block . ELSE block
+
+    ELSE  shift, and go to state 75
+
+    $default  reduce using rule 11 (statement)
+
+
+State 68
+
+   15 func_dec_parameter_list: TYPE IDENTIFIER .
+
+    $default  reduce using rule 15 (func_dec_parameter_list)
+
+
+State 69
+
+   16 func_dec_parameter_list: func_dec_parameter_list COMMA . TYPE IDENTIFIER
+
+    TYPE  shift, and go to state 76
+
+
+State 70
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS . OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES
+
+    OPEN_BRACES  shift, and go to state 77
+
+
+State 71
+
+   18 func_call_parameter_list: func_call_parameter_list COMMA . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 78
+
+
+State 72
+
+   33 factor: IDENTIFIER OPEN_PARENTHESIS func_call_parameter_list CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 33 (factor)
+
+
+State 73
+
+    3 block: OPEN_BRACES CLOSE_BRACES .
+
+    $default  reduce using rule 3 (block)
+
+
+State 74
+
+    2 block: OPEN_BRACES statement_list . CLOSE_BRACES
+    5 statement_list: statement_list . statement
+
+    TYPE          shift, and go to state 3
+    PRINT         shift, and go to state 4
+    WHILE         shift, and go to state 5
+    IF            shift, and go to state 6
+    FUNCTION      shift, and go to state 7
+    CLOSE_BRACES  shift, and go to state 79
+    IDENTIFIER    shift, and go to state 8
+
+    statement  go to state 18
+
+
+State 75
+
+   12 statement: IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block ELSE . block
+
+    OPEN_BRACES  shift, and go to state 65
+
+    block  go to state 80
+
+
+State 76
+
+   16 func_dec_parameter_list: func_dec_parameter_list COMMA TYPE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 81
+
+
+State 77
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES . statement_list RETURN relexpression CLOSE_BRACES
+
+    TYPE        shift, and go to state 3
+    PRINT       shift, and go to state 4
+    WHILE       shift, and go to state 5
+    IF          shift, and go to state 6
+    FUNCTION    shift, and go to state 7
+    IDENTIFIER  shift, and go to state 8
+
+    TYPE        [reduce using rule 6 (statement_list)]
+    PRINT       [reduce using rule 6 (statement_list)]
+    WHILE       [reduce using rule 6 (statement_list)]
+    IF          [reduce using rule 6 (statement_list)]
+    FUNCTION    [reduce using rule 6 (statement_list)]
+    IDENTIFIER  [reduce using rule 6 (statement_list)]
+    $default    reduce using rule 6 (statement_list)
+
+    statement_list  go to state 82
+    statement       go to state 10
+
+
+State 78
+
+   18 func_call_parameter_list: func_call_parameter_list COMMA IDENTIFIER .
+
+    $default  reduce using rule 18 (func_call_parameter_list)
+
+
+State 79
+
+    2 block: OPEN_BRACES statement_list CLOSE_BRACES .
+
+    $default  reduce using rule 2 (block)
+
+
+State 80
+
+   12 statement: IF OPEN_PARENTHESIS relexpression CLOSE_PARENTHESIS block ELSE block .
+
+    $default  reduce using rule 12 (statement)
+
+
+State 81
+
+   16 func_dec_parameter_list: func_dec_parameter_list COMMA TYPE IDENTIFIER .
+
+    $default  reduce using rule 16 (func_dec_parameter_list)
+
+
+State 82
+
+    5 statement_list: statement_list . statement
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list . RETURN relexpression CLOSE_BRACES
+
+    TYPE        shift, and go to state 3
+    PRINT       shift, and go to state 4
+    WHILE       shift, and go to state 5
+    IF          shift, and go to state 6
+    FUNCTION    shift, and go to state 7
+    RETURN      shift, and go to state 83
+    IDENTIFIER  shift, and go to state 8
+
+    statement  go to state 18
+
+
+State 83
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN . relexpression CLOSE_BRACES
+
+    PLUS              shift, and go to state 20
+    MINUS             shift, and go to state 21
+    NOT               shift, and go to state 22
+    OPEN_PARENTHESIS  shift, and go to state 23
+    IDENTIFIER        shift, and go to state 24
+    INT               shift, and go to state 25
+    STRING            shift, and go to state 26
+
+    relexpression  go to state 84
+    expression     go to state 28
+    term           go to state 29
+    factor         go to state 30
+
+
+State 84
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression . CLOSE_BRACES
+
+    CLOSE_BRACES  shift, and go to state 85
+
+
+State 85
+
+   14 statement: FUNCTION IDENTIFIER OPEN_PARENTHESIS func_dec_parameter_list CLOSE_PARENTHESIS OPEN_BRACES statement_list RETURN relexpression CLOSE_BRACES .
+
+    $default  reduce using rule 14 (statement)

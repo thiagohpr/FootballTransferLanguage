@@ -8,17 +8,17 @@ A linguagem criada para esse projeto tem como motivação principal simular o me
 ## Estrutura da Linguagem:
 
 ``` 
-PROGRAM = "Here we Go!", BLOCK, "End of Record"
+PROGRAM = "Here_we_Go!", BLOCK, "End_of_Record"
 BLOCK = { STATEMENT }
 STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n"
 
 ASSIGN = IDENTIFIER "is", E(XPRESSION|CONDITION)
 PRINT = "leak", "(", (EXPRESSION|CONDITION), ")"
-WHILE = "as", "(", (EXPRESSION | CONDITION), ")", "begin conversation", "{", BLOCK, "}"
-IF = "consider rumour", "(", (EXPRESSION |CONDITION), ")", "then", "{", BLOCK, "}", ["or else do","{", BLOCK, "}"]
+WHILE = "begin_conversation", "(", (EXPRESSION | CONDITION), ")",  "{", BLOCK, "}"
+IF = "consider_rumour", "(", (EXPRESSION |CONDITION), ")", "then", "{", BLOCK, "}", ["or_else_do","{", BLOCK, "}"]
 
-FUNCTION  = "transference", VARIABLE, "receives", "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
-RETURN = "complete transference", (EXPRESSION | CONDITION)
+FUNCTION  = "begin_transference", VARIABLE, "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
+RETURN = "complete_transference", (EXPRESSION | CONDITION)
 FUNCTIONCALL = VARIABLE, "(", [ VARIABLE, { ",", VARIABLE } ], ")"
 
 CONDITION =  EXPRESSION, ( "==" | "!=" | ">" | "<" | ">=" | "<=" ), EXPRESSION
@@ -47,21 +47,21 @@ SPACE = " "
 
 ```lua
 
-Here we Go!
+Here_we_Go
 
-transference GetMostValuable receives (player Jogador1, player Jogador2, value Valor1, value Valor2){
-    consider rumour (Valor1 > Valor2) then {
+begin_transference GetMostValuable (player Jogador1, player Jogador2, value Valor1, value Valor2){
+    consider_rumour (Valor1 > Valor2) {
         player chosen is Jogador1
     }
-    or else do{
-        consider rumour (Valor2 > Valor1) {
+    or_else_do{
+        consider_rumour (Valor2 > Valor1) {
             player chosen is Jogador2
         }
-        or else do{
+        or_else_do{
             player chosen is "Equals!"
         }
     }
-    complete transference chosen
+    complete_transference chosen
 }
 
 player Jogador1 is "Phillipe Coutinho"
@@ -71,14 +71,14 @@ player Jogador2 is "Ousmane Dembélé"
 value Valor2 is 140000000
 
 player MostValuable is GetMostValuable(Jogador1, Jogador2, Valor1, Valor2)
-consider rumour (MostValuable == "Equals!"){
+consider_rumour (MostValuable == "Equals!"){
     leak("Equal Market Values!")
 }
-or else do {
+or_else_do {
     leak(MostValuable)
 }
 
-End of Record
+End_of_Record
 
 ```
 

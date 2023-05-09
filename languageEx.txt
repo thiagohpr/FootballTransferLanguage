@@ -1,0 +1,32 @@
+Here_we_Go
+
+begin_transference GetMostValuable (player Jogador1, player Jogador2, value Valor1, value Valor2){
+    consider_rumour (Valor1 > Valor2) {
+        player chosen is Jogador1
+    }
+    or_else_do{
+        consider_rumour (Valor2 > Valor1) {
+            player chosen is Jogador2
+        }
+        or_else_do{
+            player chosen is "Equals!"
+        }
+    }
+    complete_transference chosen
+}
+
+player Jogador1 is "Phillipe Coutinho"
+value Valor1 is 135000000
+
+player Jogador2 is "Ousmane Dembélé"
+value Valor2 is 140000000
+
+player MostValuable is GetMostValuable(Jogador1, Jogador2, Valor1, Valor2)
+consider_rumour (MostValuable == "Equals!"){
+    leak("Equal Market Values!")
+}
+or_else_do {
+    leak(MostValuable)
+}
+
+End_of_Record
