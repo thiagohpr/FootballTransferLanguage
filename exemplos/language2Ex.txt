@@ -1,0 +1,36 @@
+Here_we_Go
+
+begin_transference soma value(value x, value y){
+    complete_transference x + y
+}
+
+value x_1
+x_1 is 2
+x_1 is soma(1, x_1)
+
+x_1 is capture()
+consider_rumour ((x_1 > 1) && !(x_1 < 1)){
+    x_1 is 3
+}
+or_else_do{   
+    x_1 is (-20+30)*4*3/40 # teste de comentario  
+}
+
+leak(x_1)
+x_1 is capture()
+
+consider_rumour ((x_1 > 1) && !(x_1 < 1)){
+    x_1 is 3
+}
+or_else_do{
+    x_1 is (-20+30)*12/40
+}
+
+leak(x_1)
+
+begin_conversation ((x_1 > 1) || (x_1 == 1)){
+    x_1 is x_1 - 1
+    leak(x_1)
+}
+
+End_of_Record

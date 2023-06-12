@@ -1,0 +1,13 @@
+Here_we_Go
+
+value Valor is 3
+player Palavra
+
+begin_conversation (Valor > 0){
+    Palavra is Palavra . "a"
+    Valor is Valor - 1
+}
+
+leak(Palavra)
+
+End_of_Record

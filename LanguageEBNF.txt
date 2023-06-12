@@ -1,32 +1,33 @@
-PROGRAM = "Here we Go!", BLOCK, "End of Record"
+PROGRAM = "Here_we_Go!", BLOCK, "End_of_Record"
 BLOCK = { STATEMENT }
-STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n"
+STATEMENT = (ASSIGN | CREATING | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n"
 
-ASSIGN = IDENTIFIER "is", E(XPRESSION|CONDITION)
+ASSIGN = IDENTIFIER, "is", (EXPRESSION|CONDITION)
+CREATING = TYPE, IDENTIFIER, ["is", (EXPRESSION|CONDITION)]
+
 PRINT = "leak", "(", (EXPRESSION|CONDITION), ")"
-WHILE = "as", "(", (EXPRESSION | CONDITION), ")", "begin conversation", "{", BLOCK, "}"
-IF = "consider rumour", "(", (EXPRESSION |CONDITION), ")", "then", "{", BLOCK, "}", ["or else do","{", BLOCK, "}"]
+WHILE = "begin_conversation", "(", (EXPRESSION | CONDITION), ")",  "{", BLOCK, "}"
+IF = "consider_rumour", "(", (EXPRESSION |CONDITION), ")", "then", "{", BLOCK, "}", ["or_else_do","{", BLOCK, "}"]
 
-FUNCTION  = "transference", VARIABLE, "receives", "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
-RETURN = "complete transference", (EXPRESSION | CONDITION)
+FUNCTION  = "begin_transference", VARIABLE, "(", [ IDENTIFIER, { ",", IDENTIFIER } ], ")", "{", { BLOCK }, "}"
+RETURN = "complete_transference", (EXPRESSION | CONDITION)
 FUNCTIONCALL = VARIABLE, "(", [ VARIABLE, { ",", VARIABLE } ], ")"
 
 CONDITION =  EXPRESSION, ( "==" | "!=" | ">" | "<" | ">=" | "<=" ), EXPRESSION
 
 EXPRESSION = TERM, {("+" | "-"), TERM} 
 TERM = FACTOR, {("*" | "/"), FACTOR} 
-FACTOR = (("+" | "-"), FACTOR) | "(", EXPRESSION, ")" | VARIABLE | PLAYER | VALUE | DEAL
+FACTOR = (("+" | "-"), FACTOR) | "(", EXPRESSION, ")" | VARIABLE | PLAYER | VALUE
 
 VARIABLE = LETTER, {CHAR}
 IDENTIFIER = VTYPE, VARIABLE
 
-PLAYER = '"', {CHAR | SPACE}, '"';
+PLAYER = '"', {CHAR | SPACE}, '"'
 VALUE = DIGIT, {DIGIT} 
-DEAL= "green" | "red"
 
-VTYPE = "player" | "value" | "deal"
+VTYPE = "player" | "value"
 
 CHAR = LETTER | DIGIT
 DIGIT = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-LETTER = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
+LETTER = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" 
 SPACE = " "

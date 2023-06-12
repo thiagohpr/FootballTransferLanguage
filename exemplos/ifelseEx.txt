@@ -1,0 +1,18 @@
+Here_we_Go
+
+value Valor1 is 135
+value Valor2 is 140
+
+consider_rumour (Valor1 > Valor2) {
+    leak("Valor 1 maior")
+}
+or_else_do{
+    consider_rumour (Valor2 > Valor1) {
+        leak("Valor 2 maior")
+    }
+    or_else_do{
+        leak("Iguais!")
+    }
+}
+
+End_of_Record

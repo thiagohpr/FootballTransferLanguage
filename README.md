@@ -10,9 +10,11 @@ A linguagem criada para esse projeto tem como motivação principal simular o me
 ``` 
 PROGRAM = "Here_we_Go!", BLOCK, "End_of_Record"
 BLOCK = { STATEMENT }
-STATEMENT = (ASSIGN | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n"
+STATEMENT = (ASSIGN | CREATING | PRINT | WHILE | IF | FUNCTION | RETURN | FUNCTIONCALL), "\n"
 
-ASSIGN = IDENTIFIER "is", E(XPRESSION|CONDITION)
+ASSIGN = IDENTIFIER, "is", (EXPRESSION|CONDITION)
+CREATING = TYPE, IDENTIFIER, ["is", (EXPRESSION|CONDITION)]
+
 PRINT = "leak", "(", (EXPRESSION|CONDITION), ")"
 WHILE = "begin_conversation", "(", (EXPRESSION | CONDITION), ")",  "{", BLOCK, "}"
 IF = "consider_rumour", "(", (EXPRESSION |CONDITION), ")", "then", "{", BLOCK, "}", ["or_else_do","{", BLOCK, "}"]
@@ -25,16 +27,15 @@ CONDITION =  EXPRESSION, ( "==" | "!=" | ">" | "<" | ">=" | "<=" ), EXPRESSION
 
 EXPRESSION = TERM, {("+" | "-"), TERM} 
 TERM = FACTOR, {("*" | "/"), FACTOR} 
-FACTOR = (("+" | "-"), FACTOR) | "(", EXPRESSION, ")" | VARIABLE | PLAYER | VALUE | DEAL
+FACTOR = (("+" | "-"), FACTOR) | "(", EXPRESSION, ")" | VARIABLE | PLAYER | VALUE
 
 VARIABLE = LETTER, {CHAR}
 IDENTIFIER = VTYPE, VARIABLE
 
 PLAYER = '"', {CHAR | SPACE}, '"'
 VALUE = DIGIT, {DIGIT} 
-DEAL= "green" | "red"
 
-VTYPE = "player" | "value" | "deal"
+VTYPE = "player" | "value"
 
 CHAR = LETTER | DIGIT
 DIGIT = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9

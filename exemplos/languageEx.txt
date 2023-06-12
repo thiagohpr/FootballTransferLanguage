@@ -1,6 +1,6 @@
 Here_we_Go
 
-begin_transference GetMostValuable (player Jogador1, player Jogador2, value Valor1, value Valor2){
+begin_transference GetMostValuable player (player Jogador1, player Jogador2, value Valor1, value Valor2){
     consider_rumour (Valor1 > Valor2) {
         player chosen is Jogador1
     }

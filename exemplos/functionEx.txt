@@ -1,0 +1,18 @@
+Here_we_Go
+
+begin_transference GetMostValuable player (player Jogador1, value Valor1){
+
+    leak(Jogador1)
+    leak(Valor1)
+
+    complete_transference "Rodou!"
+}
+
+player Jogador is "Phillipe Coutinho"
+value Valor is 135000000
+
+player MostValuable is GetMostValuable(Jogador, Valor)
+
+leak(MostValuable)
+
+End_of_Record
